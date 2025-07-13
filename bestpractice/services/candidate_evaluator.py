@@ -1,12 +1,12 @@
 
 import asyncio
 from typing import Dict, Any, List, Optional
-from models.schemas import CandidateEvaluationResponse, CandidateProfile, ComparisonItem
-from services.document_parser import DocumentParser
-from services.embedding_service import EmbeddingService
-from services.vector_store import VectorStore
-from services.llm_evaluator import LLMEvaluator
-from utils.text_processing import TextProcessor
+from bestpractice.models.schemas import CandidateEvaluationResponse, CandidateProfile, ComparisonItem
+from bestpractice.services.document_parser import DocumentParser
+from bestpractice.services.embedding_service import EmbeddingService
+from bestpractice.services.vector_store import VectorStore
+from bestpractice.services.llm_evaluator import LLMEvaluator
+from bestpractice.utils.text_processing import TextProcessor
 
 class CandidateEvaluator:
     """Main service for evaluating candidate-job fit"""
