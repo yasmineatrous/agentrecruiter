@@ -2,7 +2,7 @@ import os
 import json
 import aiohttp
 from typing import Dict, Any, List
-from config import settings
+from bestpractice.config import settings
 
 class LLMEvaluator:
     """Service for LLM-based evaluation using Mistral API"""
