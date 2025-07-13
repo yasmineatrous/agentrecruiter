@@ -30,7 +30,7 @@ app.add_middleware(
 )
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="bestpractice/static"), name="static")
 
 # Initialize the candidate evaluator
 candidate_evaluator = CandidateEvaluator()
@@ -38,7 +38,7 @@ candidate_evaluator = CandidateEvaluator()
 @app.get("/", response_class=HTMLResponse)
 async def read_root():
     """Serve the main HTML page"""
-    with open("static/index.html", "r") as f:
+    with open("bestpractice/static/index.html", "r") as f:
         return HTMLResponse(content=f.read(), status_code=200)
 
 @app.post("/evaluate-candidate", response_model=CandidateEvaluationResponse)
