@@ -1,11 +1,10 @@
 # AI-Based Candidate Evaluation System
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kCU_4uS3H2o" frameborder="0" allowfullscreen></iframe>
 
 ## Overview
 
 This project is an AI-powered system that evaluates how well a candidate's resume fits a job description. It uses advanced document parsing, semantic embeddings, vector search, and Large Language Models (LLMs) to generate detailed candidate-job fit scores and insights.
 ![Demo](demo.gif)
-
+[👉 Watch demo on YouTube](https://www.youtube.com/watch?v=kCU_4uS3H2o)
 ## System Architecture
 
 The system is modular and service-oriented, composed of:
