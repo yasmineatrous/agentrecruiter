@@ -2,7 +2,7 @@
 import asyncio
 from typing import List
 import numpy as np
-from config import settings
+from bestpractice.config import settings
 
 class EmbeddingService:
     """Service for generating text embeddings using SentenceTransformer"""
