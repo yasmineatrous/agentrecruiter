@@ -9,9 +9,9 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from models.schemas import CandidateEvaluationResponse
-from services.candidate_evaluator import CandidateEvaluator
-from config import settings
+from bestpractice.models.schemas import CandidateEvaluationResponse
+from bestpractice.services.candidate_evaluator import CandidateEvaluator
+from bestpractice.config import settings
 
 # Initialize FastAPI app
 app = FastAPI(
