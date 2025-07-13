@@ -4,7 +4,7 @@ import aiohttp
 import asyncio
 import json
 from typing import Dict, Any, Optional, List
-from config import settings
+from bestpractice.config import settings
 
 class DocumentParser:
  
