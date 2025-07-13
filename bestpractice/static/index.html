@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Candidate Fit Evaluator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="/static/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <header class="bg-primary text-white p-4 mb-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="mb-0">
+                            <i class="fas fa-user-check me-2"></i>
+                            AI Candidate Fit Evaluator
+                        </h1>
+                        <p class="mb-0 mt-2">Intelligent candidate-job matching powered by AI</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <i class="fas fa-robot fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="row">
+                <!-- Upload Form -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-light">
+                            <h3 class="card-title mb-0">
+                                <i class="fas fa-upload me-2"></i>
+                                Upload Documents
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="evaluationForm">
+                                <div class="mb-3">
+                                    <label for="candidateName" class="form-label">
+                                        <i class="fas fa-user me-1"></i>
+                                        Candidate Name (Optional)
+                                    </label>
+                                    <input type="text" class="form-control" id="candidateName" placeholder="Enter candidate name" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="resumeFile" class="form-label">
+                                        <i class="fas fa-file-alt me-1"></i>
+                                        Resume File <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" class="form-control" id="resumeFile" accept=".pdf,.docx" required />
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Supported formats: PDF, DOCX (Max 10MB)
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="jobDescriptionFile" class="form-label">
+                                        <i class="fas fa-briefcase me-1"></i>
+                                        Job Description File <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" class="form-control" id="jobDescriptionFile" accept=".pdf,.docx,.txt" required />
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Supported formats: PDF, DOCX, TXT (Max 10MB)
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg" id="evaluateBtn">
+                                        <i class="fas fa-cogs me-2"></i>
+                                        Evaluate Candidate
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-light">
+                            <h3 class="card-title mb-0">
+                                <i class="fas fa-chart-line me-2"></i>
+                                Evaluation Results
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="resultsContainer">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-upload fa-3x mb-3"></i>
+                                    <h5>Upload documents to see evaluation results</h5>
+                                    <p>The AI will analyze the candidate's resume against the job description and provide detailed insights.</p>
+                                </div>
+                            </div>
+
+                            <!-- Download JSON Button, hidden initially -->
+                            <button id="downloadJsonBtn" class="btn btn-success mt-3" style="display:none;">
+                                <i class="fas fa-download me-2"></i> Download JSON
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Modal -->
+            <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <div class="spinner-border text-primary mb-3" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <h5>Processing Documents...</h5>
+                            <p class="mb-0">Please wait while we analyze the candidate's fit for the position.</p>
+                            <div class="mt-3">
+                                <small class="text-muted" id="loadingStatus">Initializing...</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Modal -->
+            <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger text-white">
+                            <h5 class="modal-title">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Error
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="errorMessage">An error occurred during processing.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-light mt-5 py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="mb-0 text-muted">
+                            <i class="fas fa-robot me-1"></i>
+                            AI Candidate Fit Evaluator - Powered by LlamaParser and Mistral AI
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="api-status">
+                            <small class="text-muted">
+                                <i class="fas fa-server me-1"></i>
+                                <span id="apiStatus">Ready</span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
