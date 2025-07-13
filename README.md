@@ -63,7 +63,16 @@ MISTRAL_API_KEY=your_mistral_api_key
 
 ## Install Dependencies
 ```ini
+pip install poetry
+```
+```ini
 poetry install
+```
+```ini
+cd bestpractice
+```
+```ini
+python main.py
 ```
 Ensure Python 3.11+ is active:
 
