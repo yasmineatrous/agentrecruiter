@@ -3,7 +3,7 @@
 ## Overview
 
 This project is an AI-powered system that evaluates how well a candidate's resume fits a job description. It uses advanced document parsing, semantic embeddings, vector search, and Large Language Models (LLMs) to generate detailed candidate-job fit scores and insights.
-![Demo]()
+![Demo](demo.gif)
 
 ## System Architecture
 
